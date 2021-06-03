@@ -43,6 +43,7 @@ Function.prototype.myBind1 = function (context) {
   }
   const fn = this
   let args = [...arguments].slice(1)
+  console.log('args--', args)
 
   const bound = function () {
     const boundArgs = [...arguments]
@@ -61,4 +62,4 @@ Function.prototype.myBind1 = function (context) {
 }
 
 var getInfo3 = getInfo.myBind1(person, 'pkx2')
-getInfo2('27+')
+getInfo3('27+')

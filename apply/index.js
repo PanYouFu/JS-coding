@@ -7,16 +7,19 @@ Function.prototype.myApply = function (context) {
   var fn = Symbol();
   //获取传入的数组参数
   var args = arguments[1];
+  context[fn] = this
 
+  let res // 获取返回值
   if (args == undefined) { //没有传入参数直接执行
     // 执行这个函数
-    context[fn]()
+    res = context[fn]()
   } else {
     // 执行这个函数
-    context[fn](...args);
+    res = context[fn](...args);
   }
   // 从上下文中删除函数引用
   delete context.fn;
+  return res
 }
 
 
@@ -24,6 +27,7 @@ var obj ={
   name: "xb",
   getName: function(job, age){
     console.log(this.name);
+    return this.name
   }
 }
 
@@ -33,3 +37,4 @@ var me = {
 
 obj.getName(); // xb 
 obj.getName.myApply(me, ['H5', '25']); // axuebin
+console.log(obj.getName.myApply(me, ['H5', '25']))
